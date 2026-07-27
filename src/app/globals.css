@@ -1,6 +1,21 @@
 @import "tailwindcss";
 
 @theme {
+  /* NIKI — cozy & vibrant */
+  --color-cocoa: #2a1f1c;
+  --color-cocoa-soft: #4a3a34;
+  --color-ember: #e4572e;
+  --color-ember-hover: #c94722;
+  --color-mint: #1f8a7a;
+  --color-mint-soft: #2aa894;
+  --color-honey: #f0b429;
+  --color-peach: #ffd8c2;
+  --color-blush: #fff4ec;
+  --color-foam: #fffaf6;
+  --color-soft: #7a655c;
+  --color-line: #ead9ce;
+
+  /* FLEET — preserved industrial palette */
   --color-ink: #0b1420;
   --color-ink-soft: #243044;
   --color-muted: #5c6b7a;
@@ -12,8 +27,11 @@
   --color-signal: #c45e1a;
   --color-signal-hover: #a34d14;
   --color-paper: #f4f7fa;
-  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
-  --font-body: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
+
+  --font-display: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Nunito Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-fleet-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-fleet-body: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
 }
 
 @layer base {
@@ -23,15 +41,15 @@
 
   body {
     font-family: var(--font-body);
-    color: var(--color-ink);
-    background: var(--color-paper);
+    color: var(--color-cocoa);
+    background: var(--color-foam);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   ::selection {
-    background: color-mix(in srgb, var(--color-teal) 28%, transparent);
-    color: var(--color-ink);
+    background: color-mix(in srgb, var(--color-mint) 28%, transparent);
+    color: var(--color-cocoa);
   }
 }
 
@@ -40,8 +58,24 @@
     font-family: var(--font-display);
   }
 
+  .font-fleet-display {
+    font-family: var(--font-fleet-display);
+  }
+
+  .font-fleet-body {
+    font-family: var(--font-fleet-body);
+  }
+
   .text-balance {
     text-wrap: balance;
+  }
+
+  .niki-mesh {
+    background:
+      radial-gradient(ellipse 80% 60% at 10% 20%, color-mix(in srgb, var(--color-peach) 70%, transparent), transparent 55%),
+      radial-gradient(ellipse 70% 50% at 90% 10%, color-mix(in srgb, var(--color-honey) 35%, transparent), transparent 50%),
+      radial-gradient(ellipse 60% 50% at 70% 90%, color-mix(in srgb, var(--color-mint-soft) 18%, transparent), transparent 55%),
+      var(--color-blush);
   }
 }
 
@@ -53,6 +87,28 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes soft-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.04);
   }
 }
 
@@ -69,6 +125,18 @@
   animation: fade-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+.animate-soft-float {
+  animation: soft-float 5.5s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3.2s ease-in-out infinite;
+}
+
+.animate-ken-burns {
+  animation: ken-burns 18s ease-out forwards;
+}
+
 .delay-1 {
   animation-delay: 0.12s;
 }
@@ -77,6 +145,9 @@
 }
 .delay-3 {
   animation-delay: 0.36s;
+}
+.delay-4 {
+  animation-delay: 0.48s;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -1,6 +1,18 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, Source_Sans_3 } from "next/font/google";
+import { Nunito_Sans, Outfit, Space_Grotesk, Source_Sans_3 } from "next/font/google";
 import "./globals.css";
+
+const outfit = Outfit({
+  subsets: ["latin"],
+  variable: "--font-outfit",
+  display: "swap",
+});
+
+const nunitoSans = Nunito_Sans({
+  subsets: ["latin"],
+  variable: "--font-nunito",
+  display: "swap",
+});
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -15,13 +27,13 @@ const sourceSans = Source_Sans_3({
 });
 
 export const metadata: Metadata = {
-  title: "FLEET — Autonomous Fleet Platform for Field Services",
+  title: "NIKI — Autonomous Flying Home Assistant",
   description:
-    "Turn a 10-person crew into 1 operator. Truck-mounted autonomous drones coordinated by FleetOS for cleaning, inspection, spraying, and outdoor field work.",
+    "A micro indoor flying robot that wakes by voice, finds you, follows safely, helps with visual tasks, and returns to charge on its own.",
   openGraph: {
-    title: "FLEET — Autonomous Fleet Platform",
+    title: "NIKI — Your flying home assistant",
     description:
-      "Automate field-service labor from 10 people down to 1—with a shared Fleet Operating System.",
+      "Call by voice. NIKI launches, finds you, follows at a safe distance, and helps around the house—then returns to dock.",
     type: "website",
   },
 };
@@ -32,13 +44,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${spaceGrotesk.variable} ${sourceSans.variable}`}>
+    <html
+      lang="en"
+      className={`${outfit.variable} ${nunitoSans.variable} ${spaceGrotesk.variable} ${sourceSans.variable}`}
+    >
       <body
         className="font-body antialiased"
         style={
           {
-            "--font-display": "var(--font-space), ui-sans-serif, system-ui, sans-serif",
-            "--font-body": "var(--font-source), ui-sans-serif, system-ui, sans-serif",
+            "--font-display": "var(--font-outfit), ui-sans-serif, system-ui, sans-serif",
+            "--font-body": "var(--font-nunito), ui-sans-serif, system-ui, sans-serif",
+            "--font-fleet-display": "var(--font-space), ui-sans-serif, system-ui, sans-serif",
+            "--font-fleet-body": "var(--font-source), ui-sans-serif, system-ui, sans-serif",
           } as React.CSSProperties
         }
       >

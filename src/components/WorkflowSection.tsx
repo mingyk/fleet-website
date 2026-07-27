@@ -81,7 +81,7 @@ export function WorkflowSection() {
           <p className="text-sm font-semibold tracking-[0.2em] text-teal-bright uppercase">
             Mission workflow
           </p>
-          <h2 className="font-display mt-3 text-3xl font-bold tracking-tight text-paper md:text-5xl">
+          <h2 className="font-fleet-display mt-3 text-3xl font-bold tracking-tight text-paper md:text-5xl">
             Same playbook. Every job site.
           </h2>
           <p className="mt-4 text-lg text-steel">
@@ -105,14 +105,14 @@ export function WorkflowSection() {
                     }`}
                   >
                     <span
-                      className={`block font-display text-[11px] font-bold tracking-[0.16em] uppercase ${
+                      className={`block font-fleet-display text-[11px] font-bold tracking-[0.16em] uppercase ${
                         isActive ? "text-teal-bright" : "text-steel/70"
                       }`}
                     >
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <span
-                      className={`mt-1 block font-display text-base font-semibold ${
+                      className={`mt-1 block font-fleet-display text-base font-semibold ${
                         isActive ? "text-paper" : "text-steel"
                       }`}
                     >
@@ -148,7 +148,7 @@ export function WorkflowSection() {
               <p className="text-xs font-semibold tracking-[0.18em] text-teal-bright uppercase">
                 {phase.useCase}
               </p>
-              <h3 className="font-display mt-2 text-2xl font-bold text-paper md:text-3xl">
+              <h3 className="font-fleet-display mt-2 text-2xl font-bold text-paper md:text-3xl">
                 {phase.title}
               </h3>
               <p className="mt-2 max-w-lg text-sm leading-relaxed text-steel md:text-base">
