@@ -16,7 +16,7 @@ const capabilities = [
   {
     title: "Home Interaction",
     detail:
-      "Operate compatible switches, trigger existing smart-home integrations, and verify actions visually.",
+      "Lightweight articulated arms press switches, tap buttons, and handle simple household interactions—then verify the result visually.",
   },
   {
     title: "Communication",
