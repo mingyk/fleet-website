@@ -16,7 +16,7 @@ const capabilities = [
   {
     title: "Home Interaction",
     detail:
-      "Lightweight articulated arms press switches, tap buttons, and handle simple household interactions—then verify the result visually.",
+      "Soft two-pad clamps press switches, tap buttons, and grab light items—then verify the result visually.",
   },
   {
     title: "Communication",

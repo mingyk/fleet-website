@@ -17,7 +17,7 @@ const principles = [
   },
   {
     title: "Stay lightweight",
-    detail: "Awareness, mobility, and simple arm-assisted interaction—not heavy manipulation.",
+    detail: "Awareness, mobility, and simple clamp interactions—not heavy manipulation.",
   },
   {
     title: "Earn trust",
@@ -28,27 +28,27 @@ const principles = [
 const useCases = [
   {
     title: "Accessible living",
-    copy: "Read appliance displays, check another room, view elevated objects, and use lightweight arms to reach household controls without unnecessary trips.",
+    copy: "Read appliance displays, check another room, view elevated objects, and use soft clamps to help with light reach tasks without unnecessary trips.",
     image: "/images/niki-access.png",
-    alt: "NIKI with articulated arms helping a wheelchair user reach an item on a high shelf",
+    alt: "NIKI using soft clamps to hold a light item for a wheelchair user",
   },
   {
     title: "Intelligent home",
-    copy: "Instead of replacing appliances with connected ones, NIKI observes, understands, and uses soft utility arms to interact with the home you already have.",
+    copy: "Instead of replacing appliances with connected ones, NIKI observes, understands, and uses simple clamps to tap the controls you already have.",
     image: "/images/niki-appliance.png",
-    alt: "NIKI using a robotic arm to press a button on a regular kitchen oven",
+    alt: "NIKI using soft two-pad clamps on a kitchen oven control",
   },
   {
     title: "Everyday assistance",
     copy: "Follow users, locate belongings, answer requests from anywhere in the home, and handle lightweight visual and physical tasks.",
     image: "/images/niki-follow.png",
-    alt: "NIKI with folded utility arms following a person through a cozy home hallway",
+    alt: "NIKI with soft clamps following a person through a cozy home hallway",
   },
   {
     title: "Independent living",
     copy: "Daily reminders, wellness check-ins, family communication, and environmental observation—supplementing caregivers, never replacing them.",
     image: "/images/niki-communicate.png",
-    alt: "NIKI with articulated arms facilitating family communication with an older adult",
+    alt: "NIKI with soft clamps facilitating family communication with an older adult",
   },
 ];
 
@@ -70,7 +70,7 @@ export default function Home() {
       <section className="relative min-h-[100svh] overflow-hidden">
         <Image
           src="/images/hero-comes-to-you.png"
-          alt="NIKI with articulated utility arms flying toward a person in a sunlit living room"
+          alt="NIKI with sleek soft clamps flying toward a person in a sunlit living room"
           fill
           priority
           className="animate-ken-burns object-cover object-[center_30%]"
@@ -147,7 +147,7 @@ export default function Home() {
           <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem]">
             <Image
               src="/images/niki-dock.png"
-              alt="NIKI with folded utility arms resting on its glowing home charging dock"
+              alt="NIKI with soft clamps resting on its glowing home charging dock"
               fill
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 50vw"
@@ -288,7 +288,7 @@ export default function Home() {
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-soft">
               Its role is autonomous mobility, intelligent perception, and lightweight
-              arm-assisted household interaction—presence and assistance, not judgment.
+              clamp-assisted household interaction—presence and assistance, not judgment.
             </p>
           </div>
           <ul className="space-y-0">
@@ -310,7 +310,7 @@ export default function Home() {
           <div className="relative mx-auto aspect-square w-full max-w-md overflow-hidden rounded-full">
             <Image
               src="/images/niki-face.png"
-              alt="Close-up of NIKI's round expressive animated-eye face display"
+              alt="NIKI product close-up showing friendly face display and soft two-pad clamps"
               fill
               className="animate-soft-float object-cover"
               sizes="(max-width: 768px) 90vw, 40vw"
@@ -321,12 +321,12 @@ export default function Home() {
               Presence
             </p>
             <h2 className="font-display mt-3 text-3xl font-bold tracking-tight text-cocoa md:text-5xl text-balance">
-              Eyes for presence. Arms for light touch.
+              Eyes for presence. Soft clamps for light touch.
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-soft">
               A round face display shows listening, thinking, following, and privacy states.
-              Slender articulated arms—think Mister Handy, scaled for the home—handle simple
-              switches, buttons, and reach tasks without heavy manipulation.
+              Simple two-pad clamps handle buttons, switches, and light grabs—nothing more
+              complex than that.
             </p>
           </div>
         </div>
