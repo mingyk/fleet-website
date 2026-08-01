@@ -27,13 +27,13 @@ const sourceSans = Source_Sans_3({
 });
 
 export const metadata: Metadata = {
-  title: "NIKI — Autonomous Flying Home Assistant",
+  title: "NIKI — The smart home that comes to you",
   description:
-    "A micro indoor flying robot that wakes by voice, finds you, follows safely, helps with visual tasks, and returns to charge on its own.",
+    "NIKI is an autonomous aerial home intelligence platform that brings intelligent physical presence to every home—without renovating or replacing your appliances.",
   openGraph: {
-    title: "NIKI — Your flying home assistant",
+    title: "NIKI — The smart home that comes to you",
     description:
-      "Call by voice. NIKI launches, finds you, follows at a safe distance, and helps around the house—then returns to dock.",
+      "Bring intelligence wherever it's needed. NIKI flies to observe, communicate, and interact—adapting to the home you already have.",
     type: "website",
   },
 };

@@ -1,7 +1,7 @@
 {
   "name": "fleet-website",
   "version": "1.0.0",
-  "description": "NIKI — Autonomous Flying Home Assistant",
+  "description": "NIKI — Autonomous Aerial Home Intelligence Platform",
   "private": true,
   "scripts": {
     "dev": "next dev",

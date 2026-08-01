@@ -105,8 +105,8 @@ export default function FleetPage() {
               Automate a 10-person job down to 1.
             </p>
             <p className="animate-fade-up delay-2 mt-4 max-w-md text-base leading-relaxed text-white/65 md:text-lg">
-              A truck-mounted platform that deploys coordinated autonomous drones—no crew
-              required on the work surface.
+              The autonomy platform behind NIKI—and future aerial systems for field services,
+              facilities, and industry.
             </p>
             <div className="animate-fade-up delay-3 mt-8 flex flex-wrap items-center gap-3">
               <a
@@ -373,7 +373,7 @@ export default function FleetPage() {
             FLEET
           </p>
           <div className="flex flex-wrap items-center gap-4 text-sm text-steel">
-            <span>Autonomous Fleet Platform for Field Services</span>
+            <span>Autonomy platform powering NIKI and beyond</span>
             <a href="/" className="tracking-[0.12em] text-teal-bright transition-colors hover:text-paper">
               NIKI
             </a>

@@ -1,18 +1,10 @@
 # NIKI
 
-Autonomous Flying Home Assistant
+Autonomous Aerial Home Intelligence Platform
 
-A micro indoor flying robot that remains charged on a home dock, wakes by voice or app, finds you, follows safely through approved rooms, helps with visual and spoken requests, then returns to charge.
+**The smart home that comes to you.**
 
-## Product
-
-**NIKI** is the primary product. The website homepage presents the cozy home-assistant experience.
-
-**FLEET** — the earlier outdoor autonomous fleet platform concept — is preserved at `/fleet` and linked from the navbar.
-
-## MVP loop
-
-Call by voice → autonomous wake and launch → user localization → safe side-following → visual task understanding → bounded assistance → autonomous return → precision landing → automatic charging.
+NIKI brings intelligent physical presence to every home—flying to observe, communicate, and interact wherever assistance is needed, without requiring renovations or connected appliances.
 
 ## Develop
 
@@ -21,4 +13,9 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) for NIKI, and [http://localhost:3000/fleet](http://localhost:3000/fleet) for the archived Fleet platform.
+- [http://localhost:3000](http://localhost:3000) — NIKI
+- [http://localhost:3000/fleet](http://localhost:3000/fleet) — FLEET autonomy platform
+
+## FLEET
+
+FLEET builds the autonomy platform powering NIKI. Technologies developed for home aerial intelligence also support future systems in senior living, facilities, industry, and logistics.

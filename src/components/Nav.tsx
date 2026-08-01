@@ -61,14 +61,14 @@ export function Nav({ variant = "niki" }: NavProps) {
           NIKI
         </a>
         <div className="hidden items-center gap-7 text-sm font-semibold text-white/85 md:flex">
-          <a href="#loop" className="transition-colors hover:text-white">
-            How it works
+          <a href="#why-flight" className="transition-colors hover:text-white">
+            Why flight
           </a>
-          <a href="#skills" className="transition-colors hover:text-white">
-            Skills
+          <a href="#capabilities" className="transition-colors hover:text-white">
+            Capabilities
           </a>
-          <a href="#privacy" className="transition-colors hover:text-white">
-            Privacy
+          <a href="#use-cases" className="transition-colors hover:text-white">
+            Use cases
           </a>
           <a
             href="/fleet"

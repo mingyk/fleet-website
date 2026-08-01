@@ -1,73 +1,64 @@
 import Image from "next/image";
-import { AssistanceLoop } from "@/components/AssistanceLoop";
+import { CapabilitiesSection } from "@/components/CapabilitiesSection";
 import { Nav } from "@/components/Nav";
 
-const skills = [
-  "Come here.",
-  "Follow me.",
-  "Stop here.",
-  "Look at this.",
-  "What ingredients are on the counter?",
-  "Suggest a recipe from these ingredients.",
-  "Read this label.",
-  "Take a photo.",
-  "Record this.",
-  "Find my configured item.",
-  "Return to your dock.",
+const principles = [
+  {
+    title: "Bring intelligence to the point of need",
+    detail: "Rather than requiring people to move toward information, NIKI moves intelligence toward people.",
+  },
+  {
+    title: "Adapt to existing homes",
+    detail: "The home should not require renovation to become intelligent.",
+  },
+  {
+    title: "Increase independence",
+    detail: "Reduce physical effort while preserving user control.",
+  },
+  {
+    title: "Stay lightweight",
+    detail: "Awareness, mobility, and interaction—not heavy manipulation.",
+  },
+  {
+    title: "Earn trust",
+    detail: "Communicate clearly. Operate predictably. Respect privacy. Keep people in control.",
+  },
 ];
 
-const moments = [
+const useCases = [
   {
-    title: "Follows without hovering over you",
-    copy: "NIKI holds a safe side offset and stays in approved rooms—never above people, never near stairs or open doors.",
+    title: "Accessible living",
+    copy: "Read appliance displays, check another room, view elevated objects, and reach household controls without unnecessary trips.",
+    image: "/images/niki-access.png",
+    alt: "NIKI helping a wheelchair user view items on a high shelf in a bright home hallway",
+  },
+  {
+    title: "Intelligent home",
+    copy: "Instead of replacing appliances with connected ones, NIKI observes, understands, and interacts with the home you already have.",
+    image: "/images/niki-appliance.png",
+    alt: "NIKI reading a regular kitchen oven display in an ordinary home kitchen",
+  },
+  {
+    title: "Everyday assistance",
+    copy: "Follow users, locate belongings, answer requests from anywhere in the home, and handle lightweight visual tasks.",
     image: "/images/niki-follow.png",
-    alt: "NIKI following a person through a bright home hallway at a safe side distance",
+    alt: "NIKI following a person through a cozy home hallway at a safe side distance",
   },
   {
-    title: "Sees what you point at",
-    copy: "Ask about ingredients, labels, or a misplaced item. Local vision models handle the quick looks; complex questions can escalate to the cloud.",
-    image: "/images/niki-kitchen.png",
-    alt: "NIKI hovering over a kitchen counter inspecting fresh ingredients",
-  },
-  {
-    title: "Comes home on its own",
-    copy: "When the job is done—or the battery says so—NIKI returns, aligns to the dock, lands, and charges with the camera shutter closed.",
-    image: "/images/niki-return.png",
-    alt: "NIKI returning to a warmly lit charging dock in a cozy living room",
+    title: "Independent living",
+    copy: "Daily reminders, wellness check-ins, family communication, and environmental observation—supplementing caregivers, never replacing them.",
+    image: "/images/niki-communicate.png",
+    alt: "NIKI facilitating family communication with an older adult in a warm living room",
   },
 ];
 
-const split = [
-  {
-    label: "Aircraft",
-    title: "Light, quiet, safe",
-    items: [
-      "Flight stabilization & obstacle avoidance",
-      "Person tracking & safety enforcement",
-      "Video/audio streaming",
-      "Dock detection and landing",
-    ],
-  },
-  {
-    label: "Dock",
-    title: "The brains stay home",
-    items: [
-      "Wake-word, speech, and local LLM/VLM",
-      "Task planning and tool execution",
-      "Map, video, and user recognition",
-      "Jetson Orin Nano–class home compute",
-    ],
-  },
-  {
-    label: "Cloud",
-    title: "Only when useful",
-    items: [
-      "Frontier reasoning when needed",
-      "Current web information",
-      "Complex image understanding",
-      "Account sync—never required to fly home",
-    ],
-  },
+const notList = [
+  "a caregiver",
+  "a medical device",
+  "a security system",
+  "a humanoid robot",
+  "a flying camera",
+  "a replacement for human judgment",
 ];
 
 export default function Home() {
@@ -78,15 +69,15 @@ export default function Home() {
       {/* Hero */}
       <section className="relative min-h-[100svh] overflow-hidden">
         <Image
-          src="/images/hero-niki.png"
-          alt="NIKI, a small indoor flying home assistant with a friendly face display, hovering in a sunlit living room"
+          src="/images/hero-comes-to-you.png"
+          alt="NIKI flying toward a person in a sunlit living room—the smart home that comes to you"
           fill
           priority
-          className="animate-ken-burns object-cover object-center"
+          className="animate-ken-burns object-cover object-[center_30%]"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-cocoa/75 via-cocoa/35 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-cocoa/55 via-transparent to-cocoa/25" />
+        <div className="absolute inset-0 bg-gradient-to-r from-cocoa/80 via-cocoa/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-cocoa/60 via-transparent to-cocoa/25" />
 
         <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-6xl flex-col justify-end px-6 pb-16 pt-28 md:justify-center md:px-8 md:pb-24">
           <div className="max-w-xl">
@@ -94,11 +85,11 @@ export default function Home() {
               NIKI
             </h1>
             <p className="animate-fade-up delay-1 mt-5 text-xl font-semibold leading-snug text-white/95 text-balance md:text-2xl">
-              Your flying home assistant.
+              The smart home that comes to you.
             </p>
             <p className="animate-fade-up delay-2 mt-4 max-w-md text-base leading-relaxed text-white/75 md:text-lg">
-              Wake it by voice. It finds you, follows safely, helps with what it sees, then
-              returns to charge.
+              An autonomous aerial presence that brings intelligence wherever it&apos;s
+              needed—without renovating the home.
             </p>
             <div className="animate-fade-up delay-3 mt-8 flex flex-wrap items-center gap-3">
               <a
@@ -108,35 +99,55 @@ export default function Home() {
                 Request early access
               </a>
               <a
-                href="#loop"
+                href="#philosophy"
                 className="rounded-full border border-white/40 bg-white/10 px-6 py-3 text-sm font-bold text-white backdrop-blur-sm transition-colors hover:border-white hover:bg-white/20"
               >
-                See how it works
+                Explore the idea
               </a>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Dock intro */}
+      {/* Mission */}
       <section className="bg-foam py-24 md:py-32">
+        <div className="mx-auto max-w-6xl px-6 md:px-8">
+          <p className="text-sm font-bold tracking-[0.18em] text-mint uppercase">
+            Mission
+          </p>
+          <h2 className="font-display mt-3 max-w-3xl text-3xl font-bold tracking-tight text-cocoa md:text-5xl text-balance">
+            Bring intelligent physical presence to every home.
+          </h2>
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-soft">
+            Homes should become more accessible and intelligent without expensive
+            renovations, connected appliances, or complex ecosystems. Instead of replacing
+            existing homes, NIKI adapts to them—extending people&apos;s ability to navigate,
+            understand, and use everyday spaces.
+          </p>
+        </div>
+      </section>
+
+      {/* Philosophy */}
+      <section id="philosophy" className="niki-mesh py-24 md:py-32">
         <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 md:grid-cols-2 md:gap-16 md:px-8">
           <div>
             <p className="text-sm font-bold tracking-[0.18em] text-mint uppercase">
-              Always ready
+              Philosophy
             </p>
             <h2 className="font-display mt-3 text-3xl font-bold tracking-tight text-cocoa md:text-5xl text-balance">
-              Lives on the dock. Joins you when called.
+              The intelligence moves. The home stays the same.
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-soft">
-              NIKI stays charged at home, wakes on command, and only flies indoors—one mapped
-              floor, adult-supervised, with a hardware emergency stop always within reach.
+              Modern smart homes often ask you to replace lights, locks, cameras, and
+              appliances. NIKI takes a different path: observe existing devices, understand
+              their state, and selectively interact—delivering smart-home capability without
+              rebuilding the house.
             </p>
           </div>
           <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem]">
             <Image
               src="/images/niki-dock.png"
-              alt="NIKI resting on its glowing home charging dock"
+              alt="NIKI resting on its home dock, ready to bring intelligence into any room"
               fill
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 50vw"
@@ -145,47 +156,66 @@ export default function Home() {
         </div>
       </section>
 
-      <AssistanceLoop />
-
-      {/* Skills */}
-      <section id="skills" className="bg-foam py-24 md:py-32">
+      {/* Why flight */}
+      <section id="why-flight" className="bg-cocoa py-24 md:py-32">
         <div className="mx-auto max-w-6xl px-6 md:px-8">
-          <div className="max-w-2xl">
-            <p className="text-sm font-bold tracking-[0.18em] text-mint uppercase">
-              MVP skills
-            </p>
-            <h2 className="font-display mt-3 text-3xl font-bold tracking-tight text-cocoa md:text-5xl text-balance">
-              Speak simply. NIKI gets it.
-            </h2>
-            <p className="mt-4 text-lg text-soft">
-              Bounded assistance—not open-ended robot control. Flight commands stay
-              deterministic and never come from the LLM.
-            </p>
-          </div>
+          <p className="text-sm font-bold tracking-[0.18em] text-honey uppercase">
+            Why flight
+          </p>
+          <h2 className="font-display mt-3 max-w-3xl text-3xl font-bold tracking-tight text-white md:text-5xl text-balance">
+            Flight is not a feature. It is the foundation.
+          </h2>
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-peach/80">
+            Homes are three-dimensional. Ground robots stay on the floor. Fixed cameras stay
+            where they were installed. NIKI removes both limits—reaching rooms, elevated
+            viewpoints, and household objects without modifying the home.
+          </p>
 
-          <ul className="mt-12 grid gap-x-10 gap-y-0 sm:grid-cols-2">
-            {skills.map((skill) => (
-              <li
-                key={skill}
-                className="border-t border-line py-4 font-display text-lg font-semibold text-cocoa-soft md:text-xl"
-              >
-                “{skill}”
-              </li>
+          <div className="mt-14 grid gap-10 border-t border-white/15 pt-10 md:grid-cols-3">
+            {[
+              {
+                title: "Not trapped in a speaker",
+                detail: "Intelligence travels to the place that needs it—not the other way around.",
+              },
+              {
+                title: "Not stuck on the floor",
+                detail: "Shelves, counters, doorways, and multi-room layouts become reachable.",
+              },
+              {
+                title: "Not bolted to a wall",
+                detail: "One aerial agent replaces the need for cameras in every room.",
+              },
+            ].map((item) => (
+              <div key={item.title}>
+                <h3 className="font-display text-xl font-bold text-white">{item.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-peach/70">{item.detail}</p>
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
       </section>
 
-      {/* Moments */}
-      <section className="bg-cocoa">
-        {moments.map((moment, i) => (
+      <CapabilitiesSection />
+
+      {/* Use cases */}
+      <section id="use-cases" className="bg-cocoa">
+        <div className="mx-auto max-w-6xl px-6 py-20 md:px-8 md:py-24">
+          <p className="text-sm font-bold tracking-[0.18em] text-honey uppercase">
+            Primary use cases
+          </p>
+          <h2 className="font-display mt-3 max-w-2xl text-3xl font-bold tracking-tight text-white md:text-5xl text-balance">
+            Built for independence, accessibility, and everyday help.
+          </h2>
+        </div>
+
+        {useCases.map((useCase, i) => (
           <article
-            key={moment.title}
+            key={useCase.title}
             className="relative min-h-[72vh] overflow-hidden md:min-h-[78vh]"
           >
             <Image
-              src={moment.image}
-              alt={moment.alt}
+              src={useCase.image}
+              alt={useCase.alt}
               fill
               className="object-cover"
               sizes="100vw"
@@ -207,65 +237,74 @@ export default function Home() {
                   {String(i + 1).padStart(2, "0")}
                 </p>
                 <h3 className="font-display mt-3 text-3xl font-bold text-white md:text-4xl text-balance">
-                  {moment.title}
+                  {useCase.title}
                 </h3>
-                <p className="mt-4 text-base leading-relaxed text-white/75">{moment.copy}</p>
+                <p className="mt-4 text-base leading-relaxed text-white/75">{useCase.copy}</p>
               </div>
             </div>
           </article>
         ))}
       </section>
 
-      {/* Architecture */}
-      <section id="architecture" className="niki-mesh py-24 md:py-32">
+      {/* Principles */}
+      <section id="principles" className="bg-foam py-24 md:py-32">
         <div className="mx-auto max-w-6xl px-6 md:px-8">
-          <div className="grid items-end gap-10 lg:grid-cols-[1.1fr_0.9fr]">
-            <div>
-              <p className="text-sm font-bold tracking-[0.18em] text-mint uppercase">
-                Architecture
-              </p>
-              <h2 className="font-display mt-3 text-3xl font-bold tracking-tight text-cocoa md:text-5xl text-balance">
-                Keep the drone light. Put the AI on the dock.
-              </h2>
-              <p className="mt-4 max-w-xl text-lg text-soft">
-                Onboard compute stays lean so NIKI is quieter, safer, and cheaper. The home
-                dock runs wake-word, speech, local models, and planning.
-              </p>
-            </div>
-            <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem]">
-              <Image
-                src="/images/niki-architecture.png"
-                alt="NIKI aircraft with home dock computer, microphone array, and charging base"
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 40vw"
-              />
-            </div>
-          </div>
+          <p className="text-sm font-bold tracking-[0.18em] text-mint uppercase">
+            Product principles
+          </p>
+          <h2 className="font-display mt-3 max-w-2xl text-3xl font-bold tracking-tight text-cocoa md:text-5xl text-balance">
+            Human-centered intelligence.
+          </h2>
+          <p className="mt-4 max-w-xl text-lg text-soft">
+            NIKI gathers information, travels, communicates, and interacts. People remain
+            responsible for decisions.
+          </p>
 
-          <div className="mt-16 grid gap-10 border-t border-line pt-10 md:grid-cols-3">
-            {split.map((column) => (
-              <div key={column.label}>
-                <p className="text-xs font-bold tracking-[0.18em] text-ember uppercase">
-                  {column.label}
-                </p>
-                <h3 className="font-display mt-2 text-xl font-bold text-cocoa">
-                  {column.title}
+          <ul className="mt-14 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+            {principles.map((principle, i) => (
+              <li key={principle.title} className="border-t border-line pt-5">
+                <span className="font-display text-xs font-bold tracking-[0.18em] text-ember uppercase">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="font-display mt-2 text-lg font-bold text-cocoa">
+                  {principle.title}
                 </h3>
-                <ul className="mt-4 space-y-2.5">
-                  {column.items.map((item) => (
-                    <li key={item} className="text-sm leading-relaxed text-soft">
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                <p className="mt-2 text-sm leading-relaxed text-soft">{principle.detail}</p>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 
-      {/* Face / presence */}
+      {/* What NIKI is not */}
+      <section className="bg-blush py-24 md:py-32">
+        <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 md:grid-cols-2 md:gap-16 md:px-8">
+          <div>
+            <p className="text-sm font-bold tracking-[0.18em] text-mint uppercase">
+              Clarity
+            </p>
+            <h2 className="font-display mt-3 text-3xl font-bold tracking-tight text-cocoa md:text-5xl text-balance">
+              What NIKI is not.
+            </h2>
+            <p className="mt-4 text-lg leading-relaxed text-soft">
+              Its role is autonomous mobility, intelligent perception, and lightweight
+              household interaction—presence and assistance, not judgment.
+            </p>
+          </div>
+          <ul className="space-y-0">
+            {notList.map((item) => (
+              <li
+                key={item}
+                className="border-t border-line py-4 font-display text-xl font-semibold text-cocoa-soft"
+              >
+                Not {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* Presence / face */}
       <section className="bg-foam py-24 md:py-32">
         <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 md:grid-cols-2 md:gap-16 md:px-8">
           <div className="relative mx-auto aspect-square w-full max-w-md overflow-hidden rounded-full">
@@ -282,44 +321,58 @@ export default function Home() {
               Presence
             </p>
             <h2 className="font-display mt-3 text-3xl font-bold tracking-tight text-cocoa md:text-5xl text-balance">
-              Expressive eyes—not an uncanny face.
+              Always communicate what it is doing.
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-soft">
-              A lightweight round display shows sleeping, listening, thinking, following,
-              privacy, and emergency states so you always know what NIKI is doing.
+              A lightweight round display shows listening, thinking, following, privacy, and
+              status states—so NIKI stays predictable, readable, and easy to trust.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Privacy */}
-      <section id="privacy" className="bg-blush py-24 md:py-32">
+      {/* Vision */}
+      <section className="niki-mesh py-24 md:py-32">
         <div className="mx-auto max-w-6xl px-6 md:px-8">
           <p className="text-sm font-bold tracking-[0.18em] text-mint uppercase">
-            Privacy
+            Vision
           </p>
-          <h2 className="font-display mt-3 max-w-2xl text-3xl font-bold tracking-tight text-cocoa md:text-5xl text-balance">
-            A flying camera only works if trust comes first.
+          <h2 className="font-display mt-3 max-w-3xl text-3xl font-bold tracking-tight text-cocoa md:text-5xl text-balance">
+            Today&apos;s AI understands language. Tomorrow&apos;s AI will understand places.
           </h2>
-          <p className="mt-4 max-w-xl text-lg text-soft">
-            Local processing by default. Physical shutter when docked. Hardwired camera
-            indicator. Bathrooms and bedrooms excluded unless you say otherwise.
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-soft">
+            We envision a future where AI moves through the physical world as naturally as it
+            reasons through the digital one. NIKI is the first step—an autonomous aerial agent
+            that navigates, observes, communicates, and assists wherever intelligence is needed.
           </p>
+          <p className="mt-6 max-w-2xl font-display text-xl font-semibold text-cocoa">
+            Make autonomous aerial intelligence as common in homes as smartphones are today.
+          </p>
+        </div>
+      </section>
 
-          <ul className="mt-12 grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
-            {[
-              "Physical shutter while charging",
-              "Local speech and vision first",
-              "No recording by default",
-              "One-button delete all media",
-              "Guest mode & household consent",
-              "Visible privacy state on the face",
-            ].map((item) => (
-              <li key={item} className="border-t border-line pt-5">
-                <p className="font-display text-lg font-semibold text-cocoa">{item}</p>
-              </li>
-            ))}
-          </ul>
+      {/* FLEET relationship */}
+      <section className="bg-cocoa py-20 md:py-24">
+        <div className="mx-auto flex max-w-6xl flex-col gap-8 px-6 md:flex-row md:items-end md:justify-between md:px-8">
+          <div className="max-w-2xl">
+            <p className="font-display text-sm font-bold tracking-[0.22em] text-honey uppercase">
+              FLEET
+            </p>
+            <h2 className="font-display mt-3 text-3xl font-bold tracking-tight text-white md:text-4xl text-balance">
+              The autonomy platform behind NIKI.
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-peach/75">
+              Aerial navigation, localization, perception, mission planning, and human
+              interaction developed for NIKI also power future systems for senior living,
+              facilities, industry, and logistics.
+            </p>
+          </div>
+          <a
+            href="/fleet"
+            className="inline-flex rounded-full border border-white/30 px-6 py-3.5 text-sm font-bold tracking-[0.14em] text-white transition-colors hover:bg-white hover:text-cocoa"
+          >
+            Explore FLEET
+          </a>
         </div>
       </section>
 
@@ -331,10 +384,11 @@ export default function Home() {
               NIKI
             </p>
             <h2 className="font-display mt-3 text-3xl font-bold tracking-tight text-cocoa md:text-4xl text-balance">
-              Want to be first in your home?
+              Bring intelligence to your home.
             </h2>
             <p className="mt-3 max-w-md text-soft">
-              We&apos;re building the MVP loop: wake, find, follow, assist, return, charge.
+              Early access for households exploring accessibility, independence, and
+              smarter living without renovation.
             </p>
           </div>
           <a
@@ -352,8 +406,11 @@ export default function Home() {
             NIKI
           </p>
           <div className="flex flex-wrap items-center gap-4 text-sm text-peach/80">
-            <span>Autonomous Flying Home Assistant</span>
-            <a href="/fleet" className="tracking-[0.14em] text-honey transition-colors hover:text-white">
+            <span>Autonomous Aerial Home Intelligence Platform</span>
+            <a
+              href="/fleet"
+              className="tracking-[0.14em] text-honey transition-colors hover:text-white"
+            >
               FLEET
             </a>
           </div>
