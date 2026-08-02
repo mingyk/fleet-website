@@ -276,159 +276,100 @@ export function CommercialLanding() {
         </Link>
       </header>
 
-      <div className="relative z-10 mx-auto grid w-full max-w-6xl flex-1 items-center gap-8 px-4 pb-10 pt-2 lg:grid-cols-[minmax(0,1.35fr)_minmax(260px,0.8fr)] lg:px-8">
-        <div className="min-w-0">
-          <div className="commercial-tv-bezel mx-auto w-full rounded-[1.5rem] border border-[#6b5a3e] bg-gradient-to-b from-[#3a3224] to-[#1b1711] p-2.5 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.8)] md:rounded-[2rem] md:p-4">
-            <div className="relative aspect-[16/10] overflow-hidden rounded-[1rem] border border-[#2a2418] bg-black md:rounded-[1.25rem]">
-              {scenes.map((scene, i) => (
+      <div className="relative z-10 mx-auto flex w-full max-w-5xl flex-1 flex-col justify-center px-4 pb-8 pt-2 md:px-8">
+        <div className="commercial-tv-bezel mx-auto w-full rounded-[1.5rem] border border-[#6b5a3e] bg-gradient-to-b from-[#3a3224] to-[#1b1711] p-2.5 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.8)] md:rounded-[2rem] md:p-4">
+          <div className="relative aspect-[16/10] overflow-hidden rounded-[1rem] border border-[#2a2418] bg-black md:rounded-[1.25rem]">
+            {scenes.map((scene, i) => (
+              <div
+                key={scene.id}
+                className={`absolute inset-0 transition-opacity duration-700 ${
+                  i === activeIndex ? "opacity-100" : "opacity-0"
+                }`}
+              >
                 <div
-                  key={scene.id}
-                  className={`absolute inset-0 transition-opacity duration-700 ${
-                    i === activeIndex ? "opacity-100" : "opacity-0"
+                  className={`absolute inset-[-8%] ${
+                    i === activeIndex && playing
+                      ? `commercial-motion-${scene.motion}`
+                      : ""
                   }`}
                 >
-                  <div
-                    className={`absolute inset-[-8%] ${
-                      i === activeIndex && playing
-                        ? `commercial-motion-${scene.motion}`
-                        : ""
-                    }`}
-                  >
-                    <Image
-                      src={scene.image}
-                      alt=""
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 1024px) 100vw, 65vw"
-                      priority={i === 0}
-                    />
-                  </div>
+                  <Image
+                    src={scene.image}
+                    alt=""
+                    fill
+                    className="object-cover"
+                    sizes="100vw"
+                    priority={i === 0}
+                  />
                 </div>
-              ))}
+              </div>
+            ))}
 
-              <div className="commercial-scanlines pointer-events-none absolute inset-0" />
-              <div className="commercial-vignette pointer-events-none absolute inset-0" />
+            <div className="commercial-scanlines pointer-events-none absolute inset-0" />
+            <div className="commercial-vignette pointer-events-none absolute inset-0" />
 
-              {/* Only title card stays on-screen */}
-              {activeScene.id === "broadcast" && (
-                <div className="commercial-title-card pointer-events-none absolute inset-0 flex items-center justify-center p-6">
-                  <p className="font-commercial text-center text-2xl tracking-[0.08em] text-[#fff6d8] drop-shadow-[0_2px_18px_rgba(0,0,0,0.75)] md:text-4xl">
-                    Tomorrow&apos;s Home presents…
-                  </p>
-                </div>
+            {activeScene.id === "broadcast" && (
+              <div className="commercial-title-card pointer-events-none absolute inset-0 flex items-center justify-center p-6">
+                <p className="font-commercial text-center text-2xl tracking-[0.08em] text-[#fff6d8] drop-shadow-[0_2px_18px_rgba(0,0,0,0.75)] md:text-4xl">
+                  Tomorrow&apos;s Home presents…
+                </p>
+              </div>
+            )}
+
+            <button
+              type="button"
+              onClick={togglePlay}
+              className={`absolute inset-0 z-10 flex items-center justify-center transition-colors ${
+                playing && !needsGesture ? "bg-transparent" : "bg-black/30 hover:bg-black/20"
+              }`}
+              aria-label={playing ? "Pause commercial" : "Play commercial"}
+            >
+              {(!playing || needsGesture) && (
+                <span className="rounded-full border border-amber-200/40 bg-[#1d1810]/90 px-6 py-3 font-commercial text-sm tracking-[0.2em] text-amber-100 uppercase shadow-lg backdrop-blur-sm">
+                  ▶ {needsGesture ? "Tune In" : ended ? "Play Again" : "Tune In"}
+                </span>
               )}
+            </button>
+          </div>
 
-              <button
-                type="button"
-                onClick={togglePlay}
-                className={`absolute inset-0 z-10 flex items-center justify-center transition-colors ${
-                  playing && !needsGesture ? "bg-transparent" : "bg-black/30 hover:bg-black/20"
-                }`}
-                aria-label={playing ? "Pause commercial" : "Play commercial"}
-              >
-                {(!playing || needsGesture) && (
-                  <span className="rounded-full border border-amber-200/40 bg-[#1d1810]/90 px-6 py-3 font-commercial text-sm tracking-[0.2em] text-amber-100 uppercase shadow-lg backdrop-blur-sm">
-                    ▶ {needsGesture ? "Tune In" : ended ? "Play Again" : "Tune In"}
-                  </span>
-                )}
-              </button>
-            </div>
-
-            <div className="mt-3 flex items-center gap-3 px-1">
-              <button
-                type="button"
-                onClick={togglePlay}
-                className="rounded-full border border-amber-200/30 bg-[#2a2318] px-4 py-2 font-commercial text-xs tracking-[0.16em] text-amber-100 uppercase transition-colors hover:bg-[#3a3122]"
-              >
-                {playing ? "Pause" : "Play"}
-              </button>
-              <div className="min-w-0 flex-1">
-                <input
-                  type="range"
-                  min={0}
-                  max={duration}
-                  step={0.1}
-                  value={Math.min(currentTime, duration)}
-                  onChange={(e) => seekTo(Number(e.target.value))}
-                  className="commercial-seek w-full"
-                  aria-label="Seek commercial"
-                />
-                <div className="mt-1 flex justify-between font-mono text-[10px] tracking-wider text-[#b9a67d]">
-                  <span>{formatTime(currentTime)}</span>
-                  <span>{formatTime(duration)}</span>
-                </div>
+          <div className="mt-3 flex items-center gap-3 px-1">
+            <button
+              type="button"
+              onClick={togglePlay}
+              className="rounded-full border border-amber-200/30 bg-[#2a2318] px-4 py-2 font-commercial text-xs tracking-[0.16em] text-amber-100 uppercase transition-colors hover:bg-[#3a3122]"
+            >
+              {playing ? "Pause" : "Play"}
+            </button>
+            <div className="min-w-0 flex-1">
+              <input
+                type="range"
+                min={0}
+                max={duration}
+                step={0.1}
+                value={Math.min(currentTime, duration)}
+                onChange={(e) => seekTo(Number(e.target.value))}
+                className="commercial-seek w-full"
+                aria-label="Seek commercial"
+              />
+              <div className="mt-1 flex justify-between font-mono text-[10px] tracking-wider text-[#b9a67d]">
+                <span>{formatTime(currentTime)}</span>
+                <span>{formatTime(duration)}</span>
               </div>
             </div>
           </div>
+        </div>
 
-          {/* Moving credits outside the TV */}
-          <div className="relative mt-5 overflow-hidden border-y border-amber-200/15 py-4">
-            <div
-              key={activeScene.id}
-              className="commercial-credits-line mx-auto max-w-3xl px-2 text-center"
-            >
-              <p className="font-commercial text-base leading-snug tracking-[0.04em] text-[#fff1c8] md:text-xl text-balance">
-                {activeScene.line}
-              </p>
-            </div>
-          </div>
-
-          <div className="mt-7 flex flex-col items-center gap-3 text-center">
-            <Link
-              href="/discover"
-              className="rounded-full bg-amber-100 px-8 py-3.5 font-commercial text-sm tracking-[0.2em] text-[#2a1f1c] uppercase transition-colors hover:bg-honey md:text-base"
-            >
-              See NIKI Today!
-            </Link>
-            <p className="font-mono text-[11px] tracking-[0.16em] text-[#9d8b63] uppercase">
-              The smart home without smart appliances
+        {/* Fixed-height credits slot so the TV never shifts */}
+        <div className="relative mt-5 h-24 overflow-hidden border-y border-amber-200/15 md:h-28">
+          <div
+            key={activeScene.id}
+            className="commercial-credits-line absolute inset-0 flex items-center justify-center px-3"
+          >
+            <p className="font-commercial max-w-3xl text-center text-base leading-snug tracking-[0.04em] text-[#fff1c8] md:text-xl text-balance">
+              {activeScene.line}
             </p>
           </div>
         </div>
-
-        {/* Script / cue sheet */}
-        <aside className="rounded-[1.5rem] border border-[#5c4b2f] bg-[#17140f]/85 p-4 md:p-5">
-          <p className="font-commercial text-xs tracking-[0.2em] text-amber-300/80 uppercase">
-            Script
-          </p>
-          <p className="mt-1 text-sm text-[#b9a67d]">Click a line to jump ahead.</p>
-          <ol className="mt-4 max-h-[28rem] space-y-2 overflow-y-auto pr-1">
-            {scenes.map((scene, i) => {
-              const active = i === activeIndex;
-              return (
-                <li key={scene.id}>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      seekTo(scene.start);
-                      if (!playingRef.current) void play();
-                    }}
-                    className={`w-full rounded-xl border px-3 py-3 text-left transition-all ${
-                      active
-                        ? "border-amber-300/50 bg-amber-200/10"
-                        : "border-transparent bg-white/[0.02] hover:border-[#5c4b2f] hover:bg-white/[0.04]"
-                    }`}
-                  >
-                    <span
-                      className={`font-mono text-[11px] tracking-[0.16em] uppercase ${
-                        active ? "text-amber-300" : "text-[#8f7d57]"
-                      }`}
-                    >
-                      {scene.label}
-                    </span>
-                    <span
-                      className={`mt-1 block text-sm leading-snug ${
-                        active ? "text-[#fff1c8]" : "text-[#cbb992]"
-                      }`}
-                    >
-                      {scene.line}
-                    </span>
-                  </button>
-                </li>
-              );
-            })}
-          </ol>
-        </aside>
       </div>
 
       <audio ref={audioRef} src="/audio/niki_commercial_2.mp3" preload="auto" />
