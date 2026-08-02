@@ -34,11 +34,11 @@ const limelight = Limelight({
 });
 
 export const metadata: Metadata = {
-  title: "NIKI — The smart home that comes to you",
+  title: "NIKI",
   description:
     "NIKI is an autonomous aerial home intelligence platform that brings intelligent physical presence to every home—without renovating or replacing your appliances.",
   openGraph: {
-    title: "NIKI — The smart home that comes to you",
+    title: "NIKI",
     description:
       "Bring intelligence wherever it's needed. NIKI flies to observe, communicate, and interact—adapting to the home you already have.",
     type: "website",

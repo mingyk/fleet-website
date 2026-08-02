@@ -18,7 +18,7 @@ const scenes: Scene[] = [
     id: "broadcast",
     start: 0,
     label: "0:00",
-    line: "Tomorrow’s Home presents…",
+    line: "Tomorrow's Home presents",
     image: "/images/commercial/commercial-00-broadcast.png",
     motion: "pulse",
   },
@@ -26,7 +26,7 @@ const scenes: Scene[] = [
     id: "working",
     start: 5.5,
     label: "0:05.5",
-    line: "Is your home… working as hard as you are? Well, now it can!",
+    line: "Is your home working as hard as you are? Well, now it can!",
     image: "/images/commercial/commercial-01-home-working.png",
     motion: "pan-right",
   },
@@ -34,7 +34,7 @@ const scenes: Scene[] = [
     id: "introducing",
     start: 10.1,
     label: "0:10.1",
-    line: "Introducing NIKI… the world’s first autonomous flying home assistant!",
+    line: "Introducing NIKI, the world's first autonomous flying home assistant!",
     image: "/images/commercial/commercial-02-introducing.png",
     motion: "zoom-in",
   },
@@ -42,7 +42,7 @@ const scenes: Scene[] = [
     id: "no-smart",
     start: 14.9,
     label: "0:14.9",
-    line: "No smart lights. No smart oven. No smart refrigerator. Because with NIKI… your home becomes smart.",
+    line: "No smart lights. No smart oven. No smart refrigerator. Because with NIKI, your home becomes smart.",
     image: "/images/commercial/commercial-03-no-smart.png",
     motion: "pan-left",
   },
@@ -50,7 +50,7 @@ const scenes: Scene[] = [
     id: "come-here",
     start: 23.9,
     label: "0:23.9",
-    line: "Imagine this… “NIKI, come here.” And there it is!",
+    line: "Imagine this: NIKI, come here. And there it is!",
     image: "/images/commercial/commercial-04-come-here.png",
     motion: "float",
   },
@@ -66,7 +66,7 @@ const scenes: Scene[] = [
     id: "everyday",
     start: 41.5,
     label: "0:41.5",
-    line: "Whether you’re cooking dinner… helping your family… living independently… or simply enjoying your day… NIKI handles the little interruptions… so you don’t have to.",
+    line: "Whether you're cooking dinner, helping your family, living independently, or simply enjoying your day, NIKI handles the little interruptions so you don't have to.",
     image: "/images/commercial/commercial-06-everyday.png",
     motion: "zoom-in",
   },
@@ -82,7 +82,7 @@ const scenes: Scene[] = [
     id: "brings-home",
     start: 57.3,
     label: "0:57.3",
-    line: "Powered by the next generation of autonomous intelligence… NIKI doesn’t wait for the future. It brings it home.",
+    line: "Powered by the next generation of autonomous intelligence. NIKI doesn't wait for the future. It brings it home.",
     image: "/images/commercial/commercial-08-brings-home.png",
     motion: "pan-left",
   },
@@ -90,7 +90,7 @@ const scenes: Scene[] = [
     id: "available",
     start: 65.4,
     label: "1:05.4",
-    line: "NIKI. The smart home… without smart appliances. “Available… tomorrow.”",
+    line: "NIKI. The smart home without smart appliances. Available tomorrow.",
     image: "/images/commercial/commercial-09-available.png",
     motion: "float",
   },
@@ -311,7 +311,7 @@ export function CommercialLanding() {
             {activeScene.id === "broadcast" && (
               <div className="commercial-title-card pointer-events-none absolute inset-0 flex items-center justify-center p-6">
                 <p className="font-commercial text-center text-2xl tracking-[0.08em] text-[#fff6d8] drop-shadow-[0_2px_18px_rgba(0,0,0,0.75)] md:text-4xl">
-                  Tomorrow&apos;s Home presents…
+                  Tomorrow&apos;s Home presents
                 </p>
               </div>
             )}
