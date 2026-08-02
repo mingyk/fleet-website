@@ -297,11 +297,13 @@ export function CommercialLanding() {
             <div className="commercial-scanlines pointer-events-none absolute inset-0" />
             <div className="commercial-vignette pointer-events-none absolute inset-0" />
 
-            <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/55 to-transparent p-4 md:p-7">
-              <p className="font-commercial text-lg leading-snug text-[#fff6d8] md:text-2xl lg:text-3xl text-balance">
-                {activeScene.line}
-              </p>
-            </div>
+            {activeScene.id === "broadcast" && (
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/55 to-transparent p-4 md:p-7">
+                <p className="font-commercial text-lg leading-snug text-[#fff6d8] md:text-2xl lg:text-3xl text-balance">
+                  Tomorrow&apos;s Home presents…
+                </p>
+              </div>
+            )}
 
             <button
               type="button"
