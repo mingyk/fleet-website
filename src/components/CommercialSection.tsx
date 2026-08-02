@@ -95,6 +95,8 @@ const scenes: Scene[] = [
   },
 ];
 
+const FALLBACK_DURATION = 72;
+
 function formatTime(seconds: number) {
   const m = Math.floor(seconds / 60);
   const s = seconds % 60;
@@ -114,14 +116,18 @@ function sceneIndexForTime(time: number) {
 export function CommercialSection() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const previewOffsetRef = useRef(0);
+  const playingRef = useRef(false);
   const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(70);
+  const [duration, setDuration] = useState(FALLBACK_DURATION);
   const [playing, setPlaying] = useState(false);
-  const [audioReady, setAudioReady] = useState(false);
-  const [audioError, setAudioError] = useState(false);
+  const [hasAudio, setHasAudio] = useState(false);
 
   const activeIndex = useMemo(() => sceneIndexForTime(currentTime), [currentTime]);
   const activeScene = scenes[activeIndex];
+
+  useEffect(() => {
+    playingRef.current = playing;
+  }, [playing]);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -131,27 +137,40 @@ export function CommercialSection() {
     const onMeta = () => {
       if (Number.isFinite(audio.duration) && audio.duration > 0) {
         setDuration(audio.duration);
+        setHasAudio(true);
       }
-      setAudioReady(true);
     };
-    const onPlay = () => setPlaying(true);
-    const onPause = () => setPlaying(false);
+    const onCanPlay = () => setHasAudio(true);
+    const onPlay = () => {
+      playingRef.current = true;
+      setPlaying(true);
+    };
+    const onPause = () => {
+      playingRef.current = false;
+      setPlaying(false);
+    };
     const onEnded = () => {
+      playingRef.current = false;
       setPlaying(false);
       setCurrentTime(0);
     };
-    const onError = () => setAudioError(true);
+    const onError = () => setHasAudio(false);
 
     audio.addEventListener("timeupdate", onTime);
     audio.addEventListener("loadedmetadata", onMeta);
+    audio.addEventListener("canplay", onCanPlay);
     audio.addEventListener("play", onPlay);
     audio.addEventListener("pause", onPause);
     audio.addEventListener("ended", onEnded);
     audio.addEventListener("error", onError);
 
+    // Probe whether the file exists without surfacing a developer message.
+    audio.load();
+
     return () => {
       audio.removeEventListener("timeupdate", onTime);
       audio.removeEventListener("loadedmetadata", onMeta);
+      audio.removeEventListener("canplay", onCanPlay);
       audio.removeEventListener("play", onPlay);
       audio.removeEventListener("pause", onPause);
       audio.removeEventListener("ended", onEnded);
@@ -159,54 +178,65 @@ export function CommercialSection() {
     };
   }, []);
 
-  // Preview clock when the mp3 isn't available yet — still advances timestamped scenes.
+  // Silent visual timeline when audio file isn't present.
   useEffect(() => {
-    if (!audioError || !playing) return;
+    if (hasAudio || !playing) return;
+
     const id = window.setInterval(() => {
+      if (!playingRef.current) return;
       const next = (performance.now() - previewOffsetRef.current) / 1000;
       if (next >= duration) {
+        playingRef.current = false;
         setPlaying(false);
         setCurrentTime(0);
         return;
       }
       setCurrentTime(next);
     }, 100);
-    return () => window.clearInterval(id);
-  }, [audioError, playing, duration]);
 
-  const togglePlay = async () => {
+    return () => window.clearInterval(id);
+  }, [hasAudio, playing, duration]);
+
+  const pause = () => {
     const audio = audioRef.current;
-    if (audioError) {
-      if (!playing) {
-        previewOffsetRef.current = performance.now() - currentTime * 1000;
-      }
-      setPlaying((p) => !p);
-      return;
-    }
-    if (!audio) return;
-    if (audio.paused) {
-      try {
-        await audio.play();
-      } catch {
-        setAudioError(true);
-        previewOffsetRef.current = performance.now() - currentTime * 1000;
-        setPlaying(true);
-      }
-    } else {
+    if (hasAudio && audio && !audio.paused) {
       audio.pause();
     }
+    playingRef.current = false;
+    setPlaying(false);
+  };
+
+  const play = async () => {
+    const audio = audioRef.current;
+
+    if (hasAudio && audio) {
+      try {
+        await audio.play();
+        return;
+      } catch {
+        setHasAudio(false);
+      }
+    }
+
+    previewOffsetRef.current = performance.now() - currentTime * 1000;
+    playingRef.current = true;
+    setPlaying(true);
+  };
+
+  const togglePlay = () => {
+    if (playing) pause();
+    else void play();
   };
 
   const seekTo = (time: number) => {
+    const clamped = Math.max(0, Math.min(duration, time));
     const audio = audioRef.current;
-    if (audio && !audioError) {
-      audio.currentTime = time;
+    if (hasAudio && audio) {
+      audio.currentTime = clamped;
     }
-    previewOffsetRef.current = performance.now() - time * 1000;
-    setCurrentTime(time);
+    previewOffsetRef.current = performance.now() - clamped * 1000;
+    setCurrentTime(clamped);
   };
-
-  const progress = duration > 0 ? Math.min(100, (currentTime / duration) * 100) : 0;
 
   return (
     <section id="commercial" className="commercial-stage relative overflow-hidden py-24 md:py-32">
@@ -234,10 +264,9 @@ export function CommercialSection() {
         </div>
 
         <div className="mt-12 grid gap-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(280px,0.85fr)] lg:items-start">
-          {/* CRT TV */}
           <div className="commercial-tv relative mx-auto w-full max-w-3xl">
             <div className="commercial-tv-bezel rounded-[2rem] border border-[#6b5a3e] bg-gradient-to-b from-[#3a3224] to-[#1b1711] p-3 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.8)] md:p-4">
-              <div className="relative overflow-hidden rounded-[1.25rem] border border-[#2a2418] bg-black aspect-[16/10]">
+              <div className="relative aspect-[16/10] overflow-hidden rounded-[1.25rem] border border-[#2a2418] bg-black">
                 {scenes.map((scene, i) => (
                   <div
                     key={scene.id}
@@ -268,7 +297,7 @@ export function CommercialSection() {
                 <div className="commercial-vignette pointer-events-none absolute inset-0" />
                 <div className="pointer-events-none absolute inset-x-0 top-0 h-10 bg-gradient-to-b from-black/50 to-transparent" />
 
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/55 to-transparent p-4 md:p-6">
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/55 to-transparent p-4 md:p-6">
                   <p className="font-mono text-[11px] tracking-[0.18em] text-amber-300/90 uppercase">
                     {activeScene.label} · SCENE {String(activeIndex + 1).padStart(2, "0")}
                   </p>
@@ -277,26 +306,27 @@ export function CommercialSection() {
                   </p>
                 </div>
 
-                {!playing && (
-                  <button
-                    type="button"
-                    onClick={togglePlay}
-                    className="absolute inset-0 z-10 flex items-center justify-center bg-black/25 transition-colors hover:bg-black/15"
-                    aria-label="Play commercial"
-                  >
+                <button
+                  type="button"
+                  onClick={togglePlay}
+                  className={`absolute inset-0 z-10 flex items-center justify-center transition-colors ${
+                    playing ? "bg-transparent" : "bg-black/25 hover:bg-black/15"
+                  }`}
+                  aria-label={playing ? "Pause commercial" : "Play commercial"}
+                >
+                  {!playing && (
                     <span className="rounded-full border border-amber-200/40 bg-[#1d1810]/90 px-6 py-3 font-commercial text-sm tracking-[0.2em] text-amber-100 uppercase shadow-lg backdrop-blur-sm">
                       ▶ Tune In
                     </span>
-                  </button>
-                )}
+                  )}
+                </button>
               </div>
 
               <div className="mt-3 flex items-center gap-3 px-1">
                 <button
                   type="button"
                   onClick={togglePlay}
-                  disabled={audioError}
-                  className="rounded-full border border-amber-200/30 bg-[#2a2318] px-4 py-2 font-commercial text-xs tracking-[0.16em] text-amber-100 uppercase transition-colors hover:bg-[#3a3122] disabled:cursor-not-allowed disabled:opacity-40"
+                  className="rounded-full border border-amber-200/30 bg-[#2a2318] px-4 py-2 font-commercial text-xs tracking-[0.16em] text-amber-100 uppercase transition-colors hover:bg-[#3a3122]"
                 >
                   {playing ? "Pause" : "Play"}
                 </button>
@@ -304,9 +334,9 @@ export function CommercialSection() {
                   <input
                     type="range"
                     min={0}
-                    max={duration || 70}
+                    max={duration}
                     step={0.1}
-                    value={currentTime}
+                    value={Math.min(currentTime, duration)}
                     onChange={(e) => seekTo(Number(e.target.value))}
                     className="commercial-seek w-full"
                     aria-label="Seek commercial"
@@ -316,41 +346,19 @@ export function CommercialSection() {
                     <span>{formatTime(duration)}</span>
                   </div>
                 </div>
-                <div
-                  className="hidden h-2 w-16 overflow-hidden rounded-full bg-[#2a2318] sm:block"
-                  aria-hidden
-                >
-                  <div
-                    className="h-full bg-gradient-to-r from-amber-500 to-teal-400 transition-[width] duration-150"
-                    style={{ width: `${progress}%` }}
-                  />
-                </div>
               </div>
             </div>
 
             <p className="mt-3 text-center font-mono text-[11px] tracking-[0.14em] text-[#9d8b63] uppercase">
               Channel 6 · Vault-Tech Home Hour · Restored Broadcast
             </p>
-
-            {audioError && (
-              <p className="mt-2 text-center text-sm text-amber-200/80">
-                Visual preview mode — drop <code className="text-amber-100">niki_commercial_2.mp3</code>{" "}
-                into <code className="text-amber-100">public/audio/</code> to restore sound.
-              </p>
-            )}
-            {!audioError && !audioReady && (
-              <p className="mt-2 text-center text-sm text-[#9d8b63]">Loading broadcast signal…</p>
-            )}
           </div>
 
-          {/* Timestamp script cue list */}
           <div className="rounded-[1.5rem] border border-[#5c4b2f] bg-[#17140f]/85 p-4 md:p-5">
             <p className="font-commercial text-xs tracking-[0.2em] text-amber-300/80 uppercase">
               Cue sheet
             </p>
-            <p className="mt-1 text-sm text-[#b9a67d]">
-              Click a line to jump the scene.
-            </p>
+            <p className="mt-1 text-sm text-[#b9a67d]">Click a line to jump the scene.</p>
             <ol className="mt-4 max-h-[28rem] space-y-2 overflow-y-auto pr-1">
               {scenes.map((scene, i) => {
                 const active = i === activeIndex;
@@ -360,17 +368,7 @@ export function CommercialSection() {
                       type="button"
                       onClick={() => {
                         seekTo(scene.start);
-                        if (audioError) {
-                          setPlaying(true);
-                          return;
-                        }
-                        const audio = audioRef.current;
-                        if (audio && audio.paused) {
-                          void audio.play().catch(() => {
-                            setAudioError(true);
-                            setPlaying(true);
-                          });
-                        }
+                        if (!playingRef.current) void play();
                       }}
                       className={`w-full rounded-xl border px-3 py-3 text-left transition-all ${
                         active
@@ -401,7 +399,7 @@ export function CommercialSection() {
         </div>
       </div>
 
-      <audio ref={audioRef} src="/audio/niki_commercial_2.mp3" preload="metadata" />
+      <audio ref={audioRef} src="/audio/niki_commercial_2.mp3" preload="auto" />
     </section>
   );
 }
