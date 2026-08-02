@@ -18,7 +18,7 @@ const scenes: Scene[] = [
     id: "broadcast",
     start: 0,
     label: "0:00",
-    line: "Tomorrow's Home presents",
+    line: "",
     image: "/images/commercial/commercial-00-broadcast.png",
     motion: "pulse",
   },
