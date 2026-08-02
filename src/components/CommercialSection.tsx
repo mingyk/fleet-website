@@ -251,16 +251,9 @@ export function CommercialSection() {
 
       <div className="relative mx-auto max-w-6xl px-6 md:px-8">
         <div className="max-w-2xl">
-          <p className="font-commercial text-sm font-bold tracking-[0.22em] text-amber-300/90 uppercase">
-            Pre-War Broadcast
-          </p>
-          <h2 className="font-commercial mt-3 text-3xl font-bold tracking-wide text-[#f6e7c1] md:text-5xl text-balance">
+          <h2 className="font-commercial text-3xl font-bold tracking-wide text-[#f6e7c1] md:text-5xl text-balance">
             Tomorrow&apos;s Home — rediscovered.
           </h2>
-          <p className="mt-4 max-w-xl text-base leading-relaxed text-[#d7c7a4]">
-            A cheerful 1950s commercial for a future that feels almost too magical—optimism
-            from before the lights went out.
-          </p>
         </div>
 
         <div className="mt-12 grid gap-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(280px,0.85fr)] lg:items-start">
@@ -349,9 +342,6 @@ export function CommercialSection() {
               </div>
             </div>
 
-            <p className="mt-3 text-center font-mono text-[11px] tracking-[0.14em] text-[#9d8b63] uppercase">
-              Channel 6 · Vault-Tech Home Hour · Restored Broadcast
-            </p>
           </div>
 
           <div className="rounded-[1.5rem] border border-[#5c4b2f] bg-[#17140f]/85 p-4 md:p-5">
