@@ -409,6 +409,12 @@ export default function Home() {
           <div className="flex flex-wrap items-center gap-4 text-sm text-peach/80">
             <span>Autonomous Aerial Home Intelligence Platform</span>
             <a
+              href="/"
+              className="tracking-[0.14em] text-honey transition-colors hover:text-white"
+            >
+              Commercial
+            </a>
+            <a
               href="/fleet"
               className="tracking-[0.14em] text-honey transition-colors hover:text-white"
             >
