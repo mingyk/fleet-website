@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { CapabilitiesSection } from "@/components/CapabilitiesSection";
+import { CommercialSection } from "@/components/CommercialSection";
 import { Nav } from "@/components/Nav";
 
 const principles = [
@@ -196,6 +197,8 @@ export default function Home() {
       </section>
 
       <CapabilitiesSection />
+
+      <CommercialSection />
 
       {/* Use cases */}
       <section id="use-cases" className="bg-cocoa">

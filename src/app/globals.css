@@ -32,6 +32,7 @@
   --font-body: "Nunito Sans", ui-sans-serif, system-ui, sans-serif;
   --font-fleet-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
   --font-fleet-body: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
+  --font-commercial: "Limelight", ui-serif, Georgia, serif;
 }
 
 @layer base {
@@ -64,6 +65,10 @@
 
   .font-fleet-body {
     font-family: var(--font-fleet-body);
+  }
+
+  .font-commercial {
+    font-family: var(--font-commercial);
   }
 
   .text-balance {
@@ -148,6 +153,139 @@
 }
 .delay-4 {
   animation-delay: 0.48s;
+}
+
+/* Fallout / 1950s commercial CRT stage */
+.commercial-stage {
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 0%, rgba(120, 90, 40, 0.28), transparent 55%),
+    linear-gradient(180deg, #120f0b 0%, #1a1510 45%, #0d0b08 100%);
+  color: #f6e7c1;
+}
+
+.commercial-scanlines {
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 240, 200, 0.045) 0px,
+    rgba(255, 240, 200, 0.045) 1px,
+    transparent 2px,
+    transparent 4px
+  );
+  mix-blend-mode: soft-light;
+  animation: commercial-flicker 4.5s steps(2, end) infinite;
+}
+
+.commercial-vignette {
+  background:
+    radial-gradient(ellipse at center, transparent 45%, rgba(0, 0, 0, 0.55) 100%),
+    linear-gradient(180deg, rgba(80, 140, 100, 0.08), transparent 30%, rgba(180, 120, 40, 0.08));
+  mix-blend-mode: multiply;
+}
+
+.commercial-seek {
+  appearance: none;
+  height: 6px;
+  border-radius: 999px;
+  background: #2a2318;
+  outline: none;
+}
+
+.commercial-seek::-webkit-slider-thumb {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: #f0b429;
+  border: 2px solid #fff6d8;
+  cursor: pointer;
+}
+
+.commercial-seek::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: #f0b429;
+  border: 2px solid #fff6d8;
+  cursor: pointer;
+}
+
+@keyframes commercial-flicker {
+  0%,
+  100% {
+    opacity: 0.85;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes commercial-pan-right {
+  from {
+    transform: scale(1.08) translateX(-2.5%);
+  }
+  to {
+    transform: scale(1.14) translateX(2.5%);
+  }
+}
+
+@keyframes commercial-pan-left {
+  from {
+    transform: scale(1.08) translateX(2.5%);
+  }
+  to {
+    transform: scale(1.14) translateX(-2.5%);
+  }
+}
+
+@keyframes commercial-zoom-in {
+  from {
+    transform: scale(1.05);
+  }
+  to {
+    transform: scale(1.16);
+  }
+}
+
+@keyframes commercial-float {
+  0%,
+  100% {
+    transform: scale(1.08) translateY(0);
+  }
+  50% {
+    transform: scale(1.1) translateY(-1.5%);
+  }
+}
+
+@keyframes commercial-pulse {
+  0%,
+  100% {
+    transform: scale(1.07);
+    filter: saturate(1);
+  }
+  50% {
+    transform: scale(1.12);
+    filter: saturate(1.08) brightness(1.04);
+  }
+}
+
+.commercial-motion-pan-right {
+  animation: commercial-pan-right 8s ease-in-out infinite alternate;
+}
+
+.commercial-motion-pan-left {
+  animation: commercial-pan-left 8s ease-in-out infinite alternate;
+}
+
+.commercial-motion-zoom-in {
+  animation: commercial-zoom-in 9s ease-in-out infinite alternate;
+}
+
+.commercial-motion-float {
+  animation: commercial-float 4.5s ease-in-out infinite;
+}
+
+.commercial-motion-pulse {
+  animation: commercial-pulse 5s ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {

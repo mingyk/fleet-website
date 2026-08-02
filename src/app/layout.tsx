@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Nunito_Sans, Outfit, Space_Grotesk, Source_Sans_3 } from "next/font/google";
+import { Limelight, Nunito_Sans, Outfit, Space_Grotesk, Source_Sans_3 } from "next/font/google";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -26,6 +26,13 @@ const sourceSans = Source_Sans_3({
   display: "swap",
 });
 
+const limelight = Limelight({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-limelight",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "NIKI — The smart home that comes to you",
   description:
@@ -46,7 +53,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${outfit.variable} ${nunitoSans.variable} ${spaceGrotesk.variable} ${sourceSans.variable}`}
+      className={`${outfit.variable} ${nunitoSans.variable} ${spaceGrotesk.variable} ${sourceSans.variable} ${limelight.variable}`}
     >
       <body
         className="font-body antialiased"
@@ -56,6 +63,7 @@ export default function RootLayout({
             "--font-body": "var(--font-nunito), ui-sans-serif, system-ui, sans-serif",
             "--font-fleet-display": "var(--font-space), ui-sans-serif, system-ui, sans-serif",
             "--font-fleet-body": "var(--font-source), ui-sans-serif, system-ui, sans-serif",
+            "--font-commercial": "var(--font-limelight), ui-serif, Georgia, serif",
           } as React.CSSProperties
         }
       >

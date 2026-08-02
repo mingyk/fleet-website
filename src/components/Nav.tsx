@@ -67,6 +67,9 @@ export function Nav({ variant = "niki" }: NavProps) {
           <a href="#capabilities" className="transition-colors hover:text-white">
             Capabilities
           </a>
+          <a href="#commercial" className="transition-colors hover:text-white">
+            Commercial
+          </a>
           <a href="#use-cases" className="transition-colors hover:text-white">
             Use cases
           </a>
