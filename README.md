@@ -13,7 +13,8 @@ npm install
 npm run dev
 ```
 
-- [http://localhost:3000](http://localhost:3000) — NIKI
+- [http://localhost:3000](http://localhost:3000) — NIKI commercial landing
+- [http://localhost:3000/discover](http://localhost:3000/discover) — NIKI product site
 - [http://localhost:3000/fleet](http://localhost:3000/fleet) — FLEET autonomy platform
 
 ## FLEET
