@@ -50,7 +50,7 @@ const scenes: Scene[] = [
     id: "come-here",
     start: 23.9,
     label: "0:23.9",
-    line: "Imagine this: NIKI, come here. And there it is!",
+    line: "Imagine this: \"NIKI, come here.\" And there it is!",
     image: "/images/commercial/commercial-04-come-here.png",
     motion: "float",
   },
