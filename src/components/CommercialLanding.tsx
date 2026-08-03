@@ -254,7 +254,7 @@ export function CommercialLanding() {
   };
 
   return (
-    <main className="commercial-stage relative flex min-h-[100svh] flex-col overflow-hidden">
+    <main className="commercial-stage relative flex min-h-[100svh] flex-col overflow-x-hidden">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 opacity-40"
@@ -264,21 +264,21 @@ export function CommercialLanding() {
         }}
       />
 
-      <header className="relative z-20 mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-5 md:px-8">
-        <p className="font-commercial text-xl tracking-[0.18em] text-[#f6e7c1] md:text-2xl">
+      <header className="relative z-20 mx-auto flex w-full max-w-6xl items-center justify-between gap-3 px-4 py-4 sm:px-6 md:px-8 md:py-5">
+        <p className="font-commercial text-lg tracking-[0.18em] text-[#f6e7c1] sm:text-xl md:text-2xl">
           NIKI
         </p>
         <Link
           href="/discover"
-          className="rounded-full border border-amber-200/40 bg-amber-100 px-5 py-2.5 font-commercial text-xs tracking-[0.18em] text-[#2a1f1c] uppercase transition-colors hover:bg-honey md:text-sm"
+          className="shrink-0 rounded-full border border-amber-200/40 bg-amber-100 px-4 py-2 font-commercial text-[10px] tracking-[0.16em] text-[#2a1f1c] uppercase transition-colors hover:bg-honey sm:px-5 sm:py-2.5 sm:text-xs md:text-sm"
         >
           See NIKI Today!
         </Link>
       </header>
 
-      <div className="relative z-10 mx-auto flex w-full max-w-5xl flex-1 flex-col justify-center px-4 pb-8 pt-2 md:px-8">
-        <div className="commercial-tv-bezel mx-auto w-full rounded-[1.5rem] border border-[#6b5a3e] bg-gradient-to-b from-[#3a3224] to-[#1b1711] p-2.5 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.8)] md:rounded-[2rem] md:p-4">
-          <div className="relative aspect-[16/10] overflow-hidden rounded-[1rem] border border-[#2a2418] bg-black md:rounded-[1.25rem]">
+      <div className="relative z-10 mx-auto flex w-full max-w-5xl flex-1 flex-col justify-start px-3 pb-10 pt-1 sm:px-4 md:justify-center md:px-8 md:pb-8">
+        <div className="commercial-tv-bezel mx-auto w-full max-w-3xl rounded-[1.25rem] border border-[#6b5a3e] bg-gradient-to-b from-[#3a3224] to-[#1b1711] p-2 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.8)] sm:max-w-none sm:rounded-[1.5rem] sm:p-2.5 md:rounded-[2rem] md:p-4">
+          <div className="relative aspect-[16/10] overflow-hidden rounded-[0.9rem] border border-[#2a2418] bg-black sm:rounded-[1rem] md:rounded-[1.25rem]">
             {scenes.map((scene, i) => (
               <div
                 key={scene.id}
@@ -309,8 +309,8 @@ export function CommercialLanding() {
             <div className="commercial-vignette pointer-events-none absolute inset-0" />
 
             {activeScene.id === "broadcast" && (
-              <div className="commercial-title-card pointer-events-none absolute inset-0 flex items-center justify-center p-6">
-                <p className="font-commercial text-center text-2xl tracking-[0.08em] text-[#fff6d8] drop-shadow-[0_2px_18px_rgba(0,0,0,0.75)] md:text-4xl">
+              <div className="commercial-title-card pointer-events-none absolute inset-0 flex items-center justify-center p-4 sm:p-6">
+                <p className="font-commercial text-center text-xl tracking-[0.08em] text-[#fff6d8] drop-shadow-[0_2px_18px_rgba(0,0,0,0.75)] sm:text-2xl md:text-4xl">
                   Tomorrow&apos;s Home presents
                 </p>
               </div>
@@ -325,7 +325,7 @@ export function CommercialLanding() {
               aria-label={playing ? "Pause commercial" : "Play commercial"}
             >
               {(!playing || needsGesture) && (
-                <span className="rounded-full border border-amber-200/40 bg-[#1d1810]/90 px-6 py-3 font-commercial text-sm tracking-[0.2em] text-amber-100 uppercase shadow-lg backdrop-blur-sm">
+                <span className="rounded-full border border-amber-200/40 bg-[#1d1810]/90 px-5 py-2.5 font-commercial text-xs tracking-[0.2em] text-amber-100 uppercase shadow-lg backdrop-blur-sm sm:px-6 sm:py-3 sm:text-sm">
                   ▶ {needsGesture ? "Tune In" : ended ? "Play Again" : "Tune In"}
                 </span>
               )}
@@ -336,7 +336,7 @@ export function CommercialLanding() {
             <button
               type="button"
               onClick={togglePlay}
-              className="rounded-full border border-amber-200/30 bg-[#2a2318] px-4 py-2 font-commercial text-xs tracking-[0.16em] text-amber-100 uppercase transition-colors hover:bg-[#3a3122]"
+              className="rounded-full border border-amber-200/30 bg-[#2a2318] px-3 py-2 font-commercial text-[10px] tracking-[0.16em] text-amber-100 uppercase transition-colors hover:bg-[#3a3122] sm:px-4 sm:text-xs"
             >
               {playing ? "Pause" : "Play"}
             </button>
@@ -359,14 +359,11 @@ export function CommercialLanding() {
           </div>
         </div>
 
-        {/* Fixed-height credits slot so the TV never shifts */}
-        <div className="relative mt-5 h-24 overflow-hidden border-y border-amber-200/15 md:h-28">
-          <div
-            key={activeScene.id}
-            className="commercial-credits-line absolute inset-0 flex items-center justify-center px-3"
-          >
-            <p className="font-commercial max-w-3xl text-center text-base leading-snug tracking-[0.04em] text-[#fff1c8] md:text-xl text-balance">
-              {activeScene.line}
+        {/* Credits under TV — grows with wrapped lines on mobile (no clipping) */}
+        <div className="relative mt-4 flex min-h-[5.5rem] items-center justify-center border-y border-amber-200/15 px-2 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] sm:mt-5 sm:min-h-[7rem] md:min-h-28">
+          <div key={activeScene.id} className="commercial-credits-line w-full">
+            <p className="font-commercial mx-auto max-w-3xl text-center text-sm leading-snug tracking-[0.01em] break-words text-[#fff1c8] sm:text-base md:text-xl text-balance">
+              {activeScene.line || "\u00A0"}
             </p>
           </div>
         </div>
