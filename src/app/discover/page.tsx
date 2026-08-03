@@ -73,15 +73,15 @@ export default function Home() {
           alt="NIKI with sleek soft clamps flying toward a person in a sunlit living room"
           fill
           priority
-          className="animate-ken-burns object-cover object-[center_30%]"
+          className="object-cover object-[42%_42%] md:animate-ken-burns md:object-[center_30%]"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-cocoa/80 via-cocoa/40 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-cocoa/60 via-transparent to-cocoa/25" />
+        <div className="absolute inset-0 bg-gradient-to-t from-cocoa/90 via-cocoa/40 to-cocoa/20 md:bg-gradient-to-r md:from-cocoa/80 md:via-cocoa/40 md:to-transparent" />
+        <div className="absolute inset-0 hidden bg-gradient-to-t from-cocoa/60 via-transparent to-cocoa/25 md:block" />
 
-        <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-6xl flex-col justify-end px-6 pb-16 pt-28 md:justify-center md:px-8 md:pb-24">
+        <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-6xl flex-col justify-end px-5 pb-14 pt-28 sm:px-6 md:justify-center md:px-8 md:pb-24">
           <div className="max-w-xl">
-            <h1 className="font-display animate-fade-up text-6xl font-bold tracking-[0.16em] text-white sm:text-7xl md:text-8xl">
+            <h1 className="font-display animate-fade-up text-5xl font-bold tracking-[0.16em] text-white sm:text-7xl md:text-8xl">
               NIKI
             </h1>
             <p className="animate-fade-up delay-1 mt-5 text-xl font-semibold leading-snug text-white/95 text-balance md:text-2xl">
@@ -144,12 +144,12 @@ export default function Home() {
               rebuilding the house.
             </p>
           </div>
-          <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem]">
+          <div className="relative aspect-[3/2] overflow-hidden rounded-[1.5rem] bg-blush md:aspect-[4/3] md:rounded-[2rem]">
             <Image
               src="/images/niki-dock.png"
               alt="NIKI with soft clamps resting on its glowing home charging dock"
               fill
-              className="object-cover"
+              className="object-contain object-center md:object-cover"
               sizes="(max-width: 768px) 100vw, 50vw"
             />
           </div>
@@ -211,32 +211,34 @@ export default function Home() {
         {useCases.map((useCase, i) => (
           <article
             key={useCase.title}
-            className="relative min-h-[72vh] overflow-hidden md:min-h-[78vh]"
+            className="relative overflow-hidden md:min-h-[78vh]"
           >
-            <Image
-              src={useCase.image}
-              alt={useCase.alt}
-              fill
-              className="object-cover"
-              sizes="100vw"
-            />
+            <div className="relative aspect-[3/2] md:absolute md:inset-0 md:aspect-auto">
+              <Image
+                src={useCase.image}
+                alt={useCase.alt}
+                fill
+                className="object-cover object-[42%_center] md:object-center"
+                sizes="100vw"
+              />
+            </div>
             <div
-              className={`absolute inset-0 ${
+              className={`pointer-events-none absolute inset-0 hidden md:block ${
                 i % 2 === 0
                   ? "bg-gradient-to-r from-cocoa/88 via-cocoa/45 to-cocoa/10"
                   : "bg-gradient-to-l from-cocoa/88 via-cocoa/45 to-cocoa/10"
               }`}
             />
             <div
-              className={`relative z-10 mx-auto flex min-h-[72vh] max-w-6xl items-end px-6 py-16 md:min-h-[78vh] md:items-center md:px-8 md:py-24 ${
-                i % 2 === 0 ? "justify-start" : "justify-start md:justify-end"
+              className={`relative z-10 bg-cocoa px-6 py-10 md:absolute md:inset-0 md:flex md:min-h-[78vh] md:items-center md:bg-transparent md:px-8 md:py-24 ${
+                i % 2 === 0 ? "md:justify-start" : "md:justify-end"
               }`}
             >
-              <div className="max-w-md">
+              <div className="mx-auto w-full max-w-6xl md:mx-0 md:max-w-md">
                 <p className="font-display text-xs font-bold tracking-[0.2em] text-honey uppercase">
                   {String(i + 1).padStart(2, "0")}
                 </p>
-                <h3 className="font-display mt-3 text-3xl font-bold text-white md:text-4xl text-balance">
+                <h3 className="font-display mt-3 text-2xl font-bold text-white sm:text-3xl md:text-4xl text-balance">
                   {useCase.title}
                 </h3>
                 <p className="mt-4 text-base leading-relaxed text-white/75">{useCase.copy}</p>
@@ -307,12 +309,12 @@ export default function Home() {
       {/* Presence / face */}
       <section className="bg-foam py-24 md:py-32">
         <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 md:grid-cols-2 md:gap-16 md:px-8">
-          <div className="relative mx-auto aspect-square w-full max-w-md overflow-hidden rounded-full">
+          <div className="relative mx-auto aspect-square w-full max-w-[18rem] overflow-hidden rounded-full bg-blush sm:max-w-md">
             <Image
               src="/images/niki-face.png"
               alt="NIKI product close-up showing friendly face display and soft two-pad clamps"
               fill
-              className="animate-soft-float object-cover"
+              className="object-cover object-[center_40%] md:animate-soft-float md:object-center"
               sizes="(max-width: 768px) 90vw, 40vw"
             />
           </div>
